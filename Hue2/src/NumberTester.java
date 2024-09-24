@@ -18,6 +18,6 @@ public class NumberTester {
     }
 
     public void testFile(){
-        
+
     }
 }
