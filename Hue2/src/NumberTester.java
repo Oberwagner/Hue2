@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class NumberTester {
@@ -8,36 +7,8 @@ public class NumberTester {
     NumberTest oddTester;
     NumberTest palindromeTester;
 
-    static boolean usePrimeTester = false;
-    static boolean useOddTester = false;
-    static boolean usePalindromeTester = false;
 
-    static int Number2 = 0;
-
-    public NumberTester(String fileName){
-
-        try {
-            Scanner filescanner = new Scanner(new File(fileName));
-            filescanner.nextLine();
-            while (filescanner.hasNextLine()){
-
-                String line = filescanner.nextLine();
-                String[] parts = line.split(" ");
-
-                if (parts[0].equals("1")){
-                    useOddTester = true;
-                }
-                if (parts[0].equals("2")){
-                    usePrimeTester = true;
-                }
-                if (parts[0].equals("3")){
-                    usePalindromeTester = true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-    }
+    public NumberTester(String fileName){}
 
     public void setOddEvenTester(NumberTest oddTester){
         this.oddTester = oddTester;
@@ -51,9 +22,33 @@ public class NumberTester {
         this.palindromeTester = palindromeTester;
     }
 
-    public void testFile(){
-        /*primeTester.testNumber(int number2)*/{
+    public void testFile(String fileName){
+       {
+           try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+               int testCases = Integer.parseInt(reader.readLine());
 
+               for (int i = 0; i < testCases; i++) {
+                   String[] line = reader.readLine().split(" ");
+                   int testType = Integer.parseInt(line[0]);
+                   int number = Integer.parseInt(line[1]);
+
+                   switch (testType) {
+                       case 1:
+                           System.out.println(oddTester.testNumber(number) ? "EVEN" : "ODD");
+                           break;
+                       case 2:
+                           System.out.println(primeTester.testNumber(number) ? "PRIME" : "NO PRIME");
+                           break;
+                       case 3:
+                           System.out.println(palindromeTester.testNumber(number) ? "PALINDROME" : "NO PALINDROME");
+                           break;
+                   }
+               }
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
         }
     }
+
+    
 }
