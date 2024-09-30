@@ -1,9 +1,9 @@
-public class RationalCalculator extends AbstractCalculator{
+public class VectorCalculator extends AbstractCalculator{
 
-    public RationalCalculator(CalculationOperation add,
-                              CalculationOperation subtract,
-                              CalculationOperation multiply,
-                              CalculationOperation divide) {
+    public VectorCalculator(CalculationOperation add,
+                            CalculationOperation subtract,
+                            CalculationOperation multiply,
+                            CalculationOperation divide) {
         super(add, subtract, multiply, divide);
     }
 
@@ -19,11 +19,11 @@ public class RationalCalculator extends AbstractCalculator{
 
     @Override
     public Number multiply(Number a, Number b) {
-        return multiply.calc(a, b);
+        return multiply.calc(a, b); // Kreuzpodukt
     }
 
     @Override
     public Number divide(Number a, Number b) {
-        return divide.calc(a, b);
+        return divide.calc(a, b); // des Skalarprodukt
     }
 }
