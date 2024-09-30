@@ -50,5 +50,22 @@ public class NumberTester {
         }
     }
 
-    
+    public static void main(String[] args) {
+        NumberTester tester = new NumberTester("numbers.csv");
+
+        tester.setOddEvenTester(number -> number % 2 == 0); // Modolo wegen Rest.
+        tester.setPrimeTester(number -> {
+            if (number <= 1) return false;
+            for (int i = 2; i <= Math.sqrt(number); i++) { // Wurzel weil es sonst eh schon einen größeren Teiler gibt.
+                if (number % i == 0) return false; // Wenn hier ein Teiler gefunden wird ist es keine Primzahl
+            }
+            return true; // Alle tests vorbei
+        });
+        tester.setPalindromeTester(number -> {
+            String s = Integer.toString(number);
+            return s.equals(new StringBuilder(s).reverse().toString()); //Vom Internet
+        });
+
+        tester.testFile("numbers.csv");
+    }
 }
